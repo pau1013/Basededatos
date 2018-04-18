@@ -20,7 +20,7 @@ CREATE FUNCTION GET_AGE(birthdate IN DATE)
     BEGIN
         CURRENT_YEAR := EXTRACT(YEAR FROM NOW());
         BIRTH_YEAR:= EXTRACT (YEAR FROM birthdate);
-        AGE_NOW := year1 - year2;
+        AGE_NOW := CURRENT_YEAR - BIRTH_YEAR;
         RETURN(AGE_NOW);
     END;
 --Crear un procedimiento almacenado para insertar a un ganador de algun premio nobel

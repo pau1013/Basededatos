@@ -1,4 +1,17 @@
 --Crear una funcion para calcular la edad al momento de ganar un premio nobel
+CREATE FUNCTION AGE_WIN (BIRTHDATE IN DATE, WIN_DATE IN DATE)
+    RETURN INTEGER
+    IS AGE_WHEN_WON INTEGER;
+    YEAR_WON INTEGER;
+    BIRTH_YEAR INTEGER;
+    BEGIN
+        YEAR_WON := EXTRACT(YEAR FROM WIN_DATE);
+        BIRTH_YEAR := EXTRACT (YEAR FROM BIRTHDATE);
+        AGE_WHEN_WON := YEAR_WON - BIRTH_YEAR;
+        RETURN(AGE_WHEN_WON);
+    END;
+    
+--Crear una funcion para calcular la edad del ganador de un premio nobel
 CREATE FUNCTION GET_AGE(birthdate IN DATE)
     RETURN INTEGER
     IS AGE_NOW INTEGER;
@@ -10,7 +23,12 @@ CREATE FUNCTION GET_AGE(birthdate IN DATE)
         AGE_NOW := year1 - year2;
         RETURN(AGE_NOW);
     END;
---Crear una funcion para calcular la edad del ganador de un premio nobel
-
-
 --Crear un procedimiento almacenado para insertar a un ganador de algun premio nobel
+
+CREATE OR REPLACE PROCEDURE INSERT_WINNER IS WINNER INTEGER, WINNERS IN TABLE, DATA_BIRTH DATE, DATA_BIRTHPLACE IN STRING, DATA_RESIDENCE IN STRING;
+BEGIN
+INSERT INTO WINNERS
+(NAME,BIRTHDATE,BIRTHPLACE,RESIDENCE)
+VALUES
+(WINNER,DATA_BIRTH,DATA_BIRTHPLACE,DATA_RESIDENCE)
+END INSERT_WINNER;
